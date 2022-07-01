@@ -1,5 +1,6 @@
 // Shared internal imports
 import { useGetCountries } from "hooks";
+import { useHomePageContext } from "pages/Home/contexts/HomeContext";
 import CountryCard from "../CountryCard/CountryCard";
 
 // Internal imports
@@ -11,10 +12,21 @@ const CountriesContainer = () => {
 
   // HOOKS
   const { countries, countriesStatus } = useGetCountries(wantedFields);
+  const { countryToSearch } = useHomePageContext();
 
   // RENDERERS
-  const renderVisor = () =>
-    countries?.map((country) => {
+  const renderVisor = () => {
+    let tmpCountries = countries;
+
+    if (countryToSearch) {
+      tmpCountries = tmpCountries?.filter((tmpCountry) =>
+        tmpCountry.name.official
+          .toLocaleLowerCase()
+          .includes(countryToSearch.toLocaleLowerCase())
+      );
+    }
+
+    return tmpCountries?.map((country) => {
       const { flags, name, ...props } = country;
 
       return (
@@ -26,6 +38,7 @@ const CountriesContainer = () => {
         />
       );
     });
+  };
 
   const renderContent = () => {
     const resultDict = {

@@ -7,6 +7,7 @@ export const Card = styled(Flex)`
 
   width: 20rem;
   height: auto;
+  max-height: 50%;
 
   border-radius: 1rem;
   overflow: hidden;

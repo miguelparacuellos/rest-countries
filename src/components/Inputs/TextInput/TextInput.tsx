@@ -1,10 +1,12 @@
 // Internal imports
+import { useHomePageContext } from "pages/Home/contexts/HomeContext";
 import React, { useEffect, useRef } from "react";
 import { Input, LensIcon, TextInputWrapper } from "./styles";
 
 const TextInput = () => {
   // HOOKS
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const { onChangeCountry } = useHomePageContext();
 
   useEffect(() => {
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -30,7 +32,7 @@ const TextInput = () => {
 
   // HANDLERS
   const handleInputSubmit = () => {
-    console.log("Im here");
+    onChangeCountry(inputRef.current?.value);
   };
 
   const handleClickLens = () => {
@@ -44,7 +46,7 @@ const TextInput = () => {
       alignItems="center"
       columnGap="0.2rem"
     >
-      <LensIcon size={24} color="white" onClick={handleClickLens} />
+      <LensIcon size={24} onClick={handleClickLens} />
       <Input
         ref={inputRef}
         size={40}

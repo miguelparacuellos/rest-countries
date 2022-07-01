@@ -11,6 +11,8 @@ export const TextInputWrapper = styled(Flex)`
 `;
 
 export const LensIcon = styled(AiOutlineSearch)`
+  color: ${({ theme }) => theme.colors.text};
+
   cursor: pointer;
 `;
 
